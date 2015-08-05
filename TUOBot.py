@@ -2,21 +2,18 @@ import os
 import csv
 import sys
 import time
-import Image
-import offset
 import win32api
 import win32con
-import ImageOps
-import ImageGrab
+from PIL import ImageOps
+from PIL import ImageGrab
 
 def get_play_area():
-	TOP_LEFT_PIXELS = (204,204,204)
-	GREY_BORDER = (204,204,204)
-	SCREEN_WIDTH = 719
-	SCREEN_HEIGH = 479
+	TOP_LEFT_PIXELS = (192,190,167)
+	GREY_BORDER = (0,0,0)
+	SCREEN_WIDTH = 1200
+	SCREEN_HEIGH = 900
 
-	monitor_coords = getMonitorCoordinates(0) #set to whatever monitor you have the game screen on
-	im = grab(monitor_coords)
+	im = ImageGrab.grab()
 	imageWidth, imHeight = im.size
 	imageArray = im.getdata()
 
@@ -33,7 +30,7 @@ def get_play_area():
 				
 				return (left, top, left + SCREEN_WIDTH, top + SCREEN_HEIGH) 
 
-	raise Exception("Play area not in view." 
+	raise Exception("Play area not in view. " 
 			"Make sure the game is visible on screen!")
 		
 def find_state():
